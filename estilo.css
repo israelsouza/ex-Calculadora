@@ -1,0 +1,28 @@
+.box{
+    font-size: 20px;
+    margin: 0 auto;
+    width: 900px;
+    text-align: center;
+    padding: 30px;
+}
+
+.box > p{
+    padding-bottom: 20px;
+}
+
+.botoes{
+    display: flex;
+    flex-direction:column;
+    width: 100%;
+    align-items: center;
+    
+}
+
+button{
+    padding: 5px 15px;
+    width: 6%;
+    margin: 10px 0;
+    background-color: rgba(120, 120, 120, 0.283);
+    border: 1.8px solid black;
+    cursor: pointer;
+}
