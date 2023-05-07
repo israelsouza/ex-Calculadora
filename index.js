@@ -2,64 +2,118 @@
     2. Reconhecer números e sinais
     3. Realizar operação escolhida
     4. Exibir resultado na tela
-    CAIXA DE RESPOSTA PRECISA SER LIMPA APÓS SEGUNDO CLICK BOTAO 
-    FAZER TEXTO COM CSS DINAMICO, E RETIRAR createTextNode()
+    - Validação de campo vazio ou com mais de 34 caracteres
 */
+const c = console.log;
 
 const somar = document.getElementById('somar');
 const subtrair = document.getElementById('subtrair');
 const dividir = document.getElementById('dividir');
 const multiplicar = document.getElementById('multiplicar');
 const resultado = document.getElementById('resultado');
+const erroLimite = 'O campo não pode estar vazio ou exceder o limite de 34 caracteres. Tente novamente.';
+const erroNotNumber = 'Os valores precisam ser números. Tente novamente.'
+
+function quantidadeCaracteres(valor){
+    if (valor.length < 1 || valor.length >= 35) {
+        alert(erroLimite);
+        return false;
+    }
+    else {
+        return true
+    }
+}
+
+function verificarSeENumero(valor){
+    if(valor >= 0 || valor <= 0) {
+        return true;
+    } else {
+        alert(erroNotNumber);
+        return false;
+    }
+}
+
+function subtracao(valor1, valor2) {
+    if (valor1 < 0) return operacao = valor2 - valor1
+}
 
 somar.addEventListener('click', () => {
-    n1 = prompt('Digite o primeiro valor');
-    if (n1.length < 1) {        
-        alert('digite um valor')
-    } else {
-        n2 = prompt('Digite o segundo valor');
+    n1 = Number(prompt('Digite o primeiro valor'));
+    n2 = Number(prompt('Digite o segundo valor'));
 
-        if (n2 == '') {        
-            return alert('digite um valor')
-        } else {
-            texto = resultado.innerHTML = `A soma de ${n1} e ${n2} é igual a ${parseInt(n1) + parseInt(n2)}`;
+    if(quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
+        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
+
+
+
+
+
+            paragrafo = document.createElement('p');      
+            paragrafo.innerHTML = `A soma de ${n1} e ${n2} é igual a ${Number(n1) + Number(n2)}`;
+
+            resetPadraoResultado();
+            resultado.appendChild(paragrafo);
         }
     }
 })
-
 subtrair.addEventListener('click', () => {
-    n1 = prompt('Digite um valor');
-    if (n1 < 0 || n1 == ''  || typeof object) return alert('Digite um valor maior que 0')
+    n1 = Number(prompt('Digite o primeiro valor'));
+    n2 = Number(prompt('Digite o segundo valor'));
 
-    n2 = prompt('Digite outro valor');
-    if (n2 == '' || typeof object) return alert('digite um valor')
-    
-    texto = document.createTextNode(`A subtração de ${n1} por ${n2} é igual a ${parseInt(n1) - parseInt(n2)}`);
-    resultado.appendChild(texto);
+    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true){
+        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
+            operacao = n1 - n2;
+            c(operacao);
+            if(subtracao(n1, n2) == true){        c(operacao);         }
+            
+            paragrafo = document.createElement('p');      
+            paragrafo.innerHTML = `A subtração de ${n1} por ${n2} é igual a ${operacao}`;
+
+            resetResultado;
+            resultado.style.height = 'auto';
+            resultado.appendChild(paragrafo);
+        }
+    }
 })
-
 dividir.addEventListener('click', () => {
-    n1 = prompt('Digite o primeiro valor');
-    if (n1 < 1 || n1 == '' || typeof object) return alert('Digite um valor maior que 0')
+    n1 = Number(prompt('Digite o primeiro valor'));
+    n2 = Number(prompt('Por quanto deseja dividir?'));
 
-    n2 = prompt('Por quanto deseja dividir?');
-    if (n2 < 1 || n2 == '' || typeof object) return alert('Digite um valor maior que 0')
+    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
+        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
+            if (n1 <= 1 && n2 <= 1) {
+                alert('Insira valores maiores que 1')
+                resultado.innerHTML = '';
+            } else {
+                resultadoDivisao = parseFloat(n1) / parseFloat(n2);
+                paragrafo = document.createElement('p');      
+                paragrafo.innerHTML = `A divisão de ${n1} por ${n2} é igual a ${resultadoDivisao}`;
 
-    resultadoDivisao = parseFloat(n1) / parseFloat(n2);
-
-    texto = document.createTextNode(`A divisão entre ${n1} e ${n2} é igual a ${resultadoDivisao.toFixed(2)}`);
-    resultado.appendChild(texto);
+                resetResultado;
+                resultado.style.height = 'auto';
+                resultado.appendChild(paragrafo);
+            }
+        }
+    }    
 })
-
 multiplicar.addEventListener('click', () =>{
-    n1 = prompt('Digite um valor maior que 0');
-    if ( n1<1 || n1=='' || typeof object){   return alert('Digite um valor maior que 0')   };
+    n1 = Number(prompt('Digite o primeiro valor'));
+    n2 = Number(prompt('Por quanto deseja dividir?'));
 
-    n2 = prompt('Digite outro valor maior que 0');
-    if ( n2<1 || n2=='' || typeof object){   return alert('Digite um valor maior que 0')   };
-    
-    resultadoMultiplicacao = parseInt(n1) * parseInt(n2);
+    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
+        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
+            resultadoMultiplicacao = n1 * n2;
+            paragrafo = document.createElement('p');      
+            paragrafo.innerHTML = `A multiplicação de ${n1} por ${n2} é igual a ${resultadoMultiplicacao}`;
 
-    texto = document.createTextNode(`A multiplicação de ${n1} por ${n2} é igual a ${resultadoMultiplicacao}`);
-    resultado.appendChild(texto);
+            resetResultado;
+            resultado.style.height = 'auto';
+            resultado.appendChild(paragrafo);
+            }
+        }
 })
+
+function resetPadraoResultado() {
+    resultado.innerHTML = '';
+    resultado.style.height = 'auto';
+}

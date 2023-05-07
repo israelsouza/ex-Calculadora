@@ -39,3 +39,7 @@ button{
     border: 2px solid black;
     font-size: 22px;
 }
+
+.resposta > p {
+    max-width: 100%;
+}
