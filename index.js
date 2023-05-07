@@ -4,8 +4,6 @@
     4. Exibir resultado na tela
     - Validação de campo vazio ou com mais de 34 caracteres
 */
-const c = console.log;
-
 const somar = document.getElementById('somar');
 const subtrair = document.getElementById('subtrair');
 const dividir = document.getElementById('dividir');
@@ -33,87 +31,90 @@ function verificarSeENumero(valor){
     }
 }
 
-function subtracao(valor1, valor2) {
-    if (valor1 < 0) return operacao = valor2 - valor1
+function validarNumNegativo(valor1) {
+    if (valor1 <= 0) return true
+    else return false
+}
+
+function resetPadraoResultado() {
+    resultado.innerHTML = '';
+    resultado.style.minHeight = '50px';
 }
 
 somar.addEventListener('click', () => {
+    resetPadraoResultado();
     n1 = Number(prompt('Digite o primeiro valor'));
     n2 = Number(prompt('Digite o segundo valor'));
 
     if(quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
         if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
 
-
-
-
-
             paragrafo = document.createElement('p');      
             paragrafo.innerHTML = `A soma de ${n1} e ${n2} é igual a ${Number(n1) + Number(n2)}`;
+
+            resultado.appendChild(paragrafo);
+        }
+    }
+})
+
+subtrair.addEventListener('click', () => {
+    n1 = Number(prompt('Digite o primeiro valor'));
+    console.log(n1);
+    n2 = Number(prompt('Digite o segundo valor'));
+    console.log(n2);
+
+    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true){
+        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
+            // ESTA SOMANDO NEGATIVOS
+            
+            operacao = Number(n1) - Number(n2);          
+
+            paragrafo = document.createElement('p');      
+            paragrafo.innerHTML = `A subtração de ${n1} por ${n2} é igual a ${operacao}`;
 
             resetPadraoResultado();
             resultado.appendChild(paragrafo);
         }
     }
 })
-subtrair.addEventListener('click', () => {
-    n1 = Number(prompt('Digite o primeiro valor'));
-    n2 = Number(prompt('Digite o segundo valor'));
 
-    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true){
-        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-            operacao = n1 - n2;
-            c(operacao);
-            if(subtracao(n1, n2) == true){        c(operacao);         }
-            
-            paragrafo = document.createElement('p');      
-            paragrafo.innerHTML = `A subtração de ${n1} por ${n2} é igual a ${operacao}`;
-
-            resetResultado;
-            resultado.style.height = 'auto';
-            resultado.appendChild(paragrafo);
-        }
-    }
-})
 dividir.addEventListener('click', () => {
     n1 = Number(prompt('Digite o primeiro valor'));
     n2 = Number(prompt('Por quanto deseja dividir?'));
 
     if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
         if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-            if (n1 <= 1 && n2 <= 1) {
-                alert('Insira valores maiores que 1')
-                resultado.innerHTML = '';
+            if (n1 <= 1 || n2 <= 1) {
+                alert('Insira valores maiores que 1');
+                resetPadraoResultado();
             } else {
                 resultadoDivisao = parseFloat(n1) / parseFloat(n2);
                 paragrafo = document.createElement('p');      
                 paragrafo.innerHTML = `A divisão de ${n1} por ${n2} é igual a ${resultadoDivisao}`;
 
-                resetResultado;
-                resultado.style.height = 'auto';
+                resetPadraoResultado();
                 resultado.appendChild(paragrafo);
             }
         }
     }    
 })
+
 multiplicar.addEventListener('click', () =>{
     n1 = Number(prompt('Digite o primeiro valor'));
-    n2 = Number(prompt('Por quanto deseja dividir?'));
+    n2 = Number(prompt('Por quanto deseja multiplicar?'));
 
     if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
         if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-            resultadoMultiplicacao = n1 * n2;
-            paragrafo = document.createElement('p');      
-            paragrafo.innerHTML = `A multiplicação de ${n1} por ${n2} é igual a ${resultadoMultiplicacao}`;
+            if (n1 <= 0 || n2 <= 0) {
+                alert('Insira valores maiores que 1');
+                resetPadraoResultado();
+            }else {
+                paragrafo = document.createElement('p');      
+                paragrafo.innerHTML = `A multiplicação de ${n1} por ${n2} é igual a ${n1 * n2}`;
 
-            resetResultado;
-            resultado.style.height = 'auto';
-            resultado.appendChild(paragrafo);
+                resetPadraoResultado();
+                resultado.appendChild(paragrafo);
             }
         }
+    }
 })
-
-function resetPadraoResultado() {
-    resultado.innerHTML = '';
-    resultado.style.height = 'auto';
-}
