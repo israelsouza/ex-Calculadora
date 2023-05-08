@@ -4,13 +4,36 @@
     4. Exibir resultado na tela
     - Validação de campo vazio ou com mais de 34 caracteres
 */
+const primeiroValor = document.getElementById('valorUm');
+const segundoValor = document.getElementById('valorDois');
+
 const somar = document.getElementById('somar');
+
+somar.addEventListener('click', () => {
+    n1 = Number(primeiroValor);
+    console.log(n1);
+    n2 = Number(segundoValor);
+    console.log(n2);
+
+    if (n1 = '' || n2 == '' || n1.length < 1 || n2 < 1 ) {
+        alert('ERRO, CAMPOS VAZIOS');
+        console.log(primeiroValor, segundoValor);
+    } else {
+        alert('Campo preenchido')
+        console.log(primeiroValor, segundoValor);
+    }
+})
+
+/*
+
 const subtrair = document.getElementById('subtrair');
 const dividir = document.getElementById('dividir');
 const multiplicar = document.getElementById('multiplicar');
+
 const resultado = document.getElementById('resultado');
 const erroLimite = 'O campo não pode estar vazio ou exceder o limite de 34 caracteres. Tente novamente.';
-const erroNotNumber = 'Os valores precisam ser números. Tente novamente.'
+const erroNotNumber = 'Preencha todos os valores.';
+
 
 function quantidadeCaracteres(valor){
     if (valor.length < 1 || valor.length >= 35) {
@@ -31,48 +54,26 @@ function verificarSeENumero(valor){
     }
 }
 
-function validarNumNegativo(valor1) {
-    if (valor1 <= 0) return true
-    else return false
-}
-
 function resetPadraoResultado() {
     resultado.innerHTML = '';
     resultado.style.minHeight = '50px';
 }
 
-somar.addEventListener('click', () => {
-    resetPadraoResultado();
-    n1 = Number(prompt('Digite o primeiro valor'));
-    n2 = Number(prompt('Digite o segundo valor'));
 
-    if(quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
-        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-
-            paragrafo = document.createElement('p');      
-            paragrafo.innerHTML = `A soma de ${n1} e ${n2} é igual a ${Number(n1) + Number(n2)}`;
-
-            resultado.appendChild(paragrafo);
-        }
-    }
-})
 
 subtrair.addEventListener('click', () => {
-    n1 = Number(prompt('Digite o primeiro valor'));
+    n1 = prompt('Digite o primeiro valor');
     console.log(n1);
-    n2 = Number(prompt('Digite o segundo valor'));
+    n2 = prompt('Digite o segundo valor');
     console.log(n2);
 
     if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true){
         if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-            // ESTA SOMANDO NEGATIVOS
-            
-            operacao = Number(n1) - Number(n2);          
+            resultadoSubtracao = `${Number(n1)-Number(n2)}`;
 
-            paragrafo = document.createElement('p');      
-            paragrafo.innerHTML = `A subtração de ${n1} por ${n2} é igual a ${operacao}`;
+            paragrafo = document.createElement('p');
+            paragrafo.innerHTML = `O resultado da subtração de ${n1} por ${n2} é igual a ${Number(resultadoSubtracao.value)}`;
 
-            resetPadraoResultado();
             resultado.appendChild(paragrafo);
         }
     }
@@ -117,4 +118,4 @@ multiplicar.addEventListener('click', () =>{
             }
         }
     }
-})
+}) */
