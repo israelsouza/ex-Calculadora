@@ -1,121 +1,97 @@
-/*  1. Capturar elementos
-    2. Reconhecer números e sinais
-    3. Realizar operação escolhida
-    4. Exibir resultado na tela
-    - Validação de campo vazio ou com mais de 34 caracteres
-*/
+// elementos html
 const primeiroValor = document.getElementById('valorUm');
 const segundoValor = document.getElementById('valorDois');
+const resultadoFinal = document.getElementById('resultado');
 
-const somar = document.getElementById('somar');
+const operacaoAdicao = document.getElementById('somar');
+const operacaoSubtracao = document.getElementById('subtrair');
+const operacaoMultiplicacao = document.getElementById('multiplicar');
+const operacaoDivisao = document.getElementById('dividir');
 
-somar.addEventListener('click', () => {
-    n1 = Number(primeiroValor);
-    console.log(n1);
-    n2 = Number(segundoValor);
-    console.log(n2);
+// mensagens de erros
+const erroPreenchaOsCampos = 'Preencha todos os campos com valores diferentes de 0 para prosseguir.';
+const erroCaracteresMuitoLongos = 'Insira um número que possua até 20 digitos.';
+const erroValorNegativo = 'Insira um valor maior que 0 para realizar o cálculo.';
 
-    if (n1 = '' || n2 == '' || n1.length < 1 || n2 < 1 ) {
-        alert('ERRO, CAMPOS VAZIOS');
-        console.log(primeiroValor, segundoValor);
+// funções
+function camposVazios(valorUm, valorDois){
+    if (valorUm == '' || valorDois == '') return true
+    else return false
+}
+
+function quantidadeCaracteres(valorUm, valorDois){
+    if (valorUm.toString().length >= 21 || valorDois.toString().length >= 21) return true
+    else return false
+}
+
+function criandoEAnexandoParagrafo(val1, val2, resultadoOperacao, msgCalculo) {
+    paragrafo = document.createElement('p');
+    paragrafo.innerHTML = `A ${msgCalculo} de ${val1} por ${val2} é igual a ${resultadoOperacao} `;
+    resultadoFinal.innerHTML = '';
+    resultadoFinal.appendChild(paragrafo);
+}
+
+function valorNegativo(elem1, elem2){
+    if (elem1 < 0 || elem2 < 0) return true
+    else return false
+}
+
+operacaoAdicao.addEventListener('click', () => {
+    n1 = Number(primeiroValor.value);
+    n2 = Number(segundoValor.value);
+    
+    if (camposVazios(n1, n2) == true) {
+        alert(erroPreenchaOsCampos);                 
+    } else if (quantidadeCaracteres(n1, n2) == true) {
+        alert(erroCaracteresMuitoLongos);
     } else {
-        alert('Campo preenchido')
-        console.log(primeiroValor, segundoValor);
+        resultadoAdicao = n1 + n2;
+        criandoEAnexandoParagrafo(n1, n2, resultadoAdicao, 'soma')
     }
 })
 
-/*
+operacaoSubtracao.addEventListener('click', () => {
+    n1 = Number(primeiroValor.value);
+    n2 = Number(segundoValor.value);
 
-const subtrair = document.getElementById('subtrair');
-const dividir = document.getElementById('dividir');
-const multiplicar = document.getElementById('multiplicar');
-
-const resultado = document.getElementById('resultado');
-const erroLimite = 'O campo não pode estar vazio ou exceder o limite de 34 caracteres. Tente novamente.';
-const erroNotNumber = 'Preencha todos os valores.';
-
-
-function quantidadeCaracteres(valor){
-    if (valor.length < 1 || valor.length >= 35) {
-        alert(erroLimite);
-        return false;
-    }
-    else {
-        return true
-    }
-}
-
-function verificarSeENumero(valor){
-    if(valor >= 0 || valor <= 0) {
-        return true;
+    if ( camposVazios(n1, n2) == true) {
+        alert(erroPreenchaOsCampos);
+    } else if (quantidadeCaracteres(n1, n2) == true) {
+        alert(erroCaracteresMuitoLongos);
     } else {
-        alert(erroNotNumber);
-        return false;
-    }
-}
-
-function resetPadraoResultado() {
-    resultado.innerHTML = '';
-    resultado.style.minHeight = '50px';
-}
-
-
-
-subtrair.addEventListener('click', () => {
-    n1 = prompt('Digite o primeiro valor');
-    console.log(n1);
-    n2 = prompt('Digite o segundo valor');
-    console.log(n2);
-
-    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true){
-        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-            resultadoSubtracao = `${Number(n1)-Number(n2)}`;
-
-            paragrafo = document.createElement('p');
-            paragrafo.innerHTML = `O resultado da subtração de ${n1} por ${n2} é igual a ${Number(resultadoSubtracao.value)}`;
-
-            resultado.appendChild(paragrafo);
-        }
+        resultadoSubtracao = n1 - n2;
+        criandoEAnexandoParagrafo(n1, n2, resultadoSubtracao, 'subtração');
     }
 })
 
-dividir.addEventListener('click', () => {
-    n1 = Number(prompt('Digite o primeiro valor'));
-    n2 = Number(prompt('Por quanto deseja dividir?'));
+operacaoMultiplicacao.addEventListener('click', () => {
+    n1 = Number(primeiroValor.value);
+    n2 = Number(segundoValor.value);
 
-    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
-        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-            if (n1 <= 1 || n2 <= 1) {
-                alert('Insira valores maiores que 1');
-                resetPadraoResultado();
-            } else {
-                resultadoDivisao = parseFloat(n1) / parseFloat(n2);
-                paragrafo = document.createElement('p');      
-                paragrafo.innerHTML = `A divisão de ${n1} por ${n2} é igual a ${resultadoDivisao}`;
-
-                resetPadraoResultado();
-                resultado.appendChild(paragrafo);
-            }
-        }
-    }    
+    if ( camposVazios(n1, n2) == true ) {
+        alert(erroPreenchaOsCampos);
+    } else if(quantidadeCaracteres(n1,n2) == true) {
+        alert(erroCaracteresMuitoLongos);
+    } else if( valorNegativo(n1, n2) == true) {
+        alert(erroValorNegativo);
+    } else {                
+        resultadoMultiplicacao = n1 * n2;
+        criandoEAnexandoParagrafo(n1, n2, resultadoMultiplicacao, 'multiplicação');
+    }
 })
 
-multiplicar.addEventListener('click', () =>{
-    n1 = Number(prompt('Digite o primeiro valor'));
-    n2 = Number(prompt('Por quanto deseja multiplicar?'));
+operacaoDivisao.addEventListener('click', () => {
+    n1 = Number(primeiroValor.value);
+    n2 = Number(segundoValor.value);
 
-    if (quantidadeCaracteres(n1) == true && quantidadeCaracteres(n2) == true) {
-        if (verificarSeENumero(n1) == true && verificarSeENumero(n2) == true) {
-            if (n1 <= 0 || n2 <= 0) {
-                alert('Insira valores maiores que 1');
-                resetPadraoResultado();
-            }else {
-                paragrafo = document.createElement('p');      
-                paragrafo.innerHTML = `A multiplicação de ${n1} por ${n2} é igual a ${n1 * n2}`;
-
-                resetPadraoResultado();
-                resultado.appendChild(paragrafo);
-            }
-        }
+    if (camposVazios(n1, n2) == true) {
+        alert(erroPreenchaOsCampos);
+    } else if (quantidadeCaracteres(n1, n2) == true) {
+        alert(erroCaracteresMuitoLongos);
+    } else if (valorNegativo(n1, n2) == true) {
+        alert(erroValorNegativo);
+    } else {
+        resultadoDivisao = n1 / n2;
+        criandoEAnexandoParagrafo(n1, n2, resultadoDivisao, 'divisão')
     }
-}) */
+})
