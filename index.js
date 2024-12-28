@@ -7,18 +7,19 @@ const operacaoAdicao = document.getElementById('somar');
 const operacaoSubtracao = document.getElementById('subtrair');
 const operacaoMultiplicacao = document.getElementById('multiplicar');
 const operacaoDivisao = document.getElementById('dividir');
+const reset = document.getElementById('reset');
 
 const todosOsNumeros = document.querySelectorAll("div.numero-valor")
-var numerosComValue = []
+
+const mensagemDeErro = 'Selecione 2 valores antes de fazer a operação'
 
 var n1 = 0
-var n2
+var n2 = 0
 
-adicionarValor()
-function adicionarValor() {
-    for (let i = 0; i < todosOsNumeros.length; i++) {
-        numerosComValue.push(todosOsNumeros[i].setAttribute('value', i + 1))
-    }
+// manipulação arrays
+
+for (let i = 0; i < todosOsNumeros.length; i++) {
+    todosOsNumeros[i].setAttribute('value', i + 1)
 }
 
 todosOsNumeros.forEach(numero => {
@@ -41,6 +42,11 @@ function limpandoAsVariaveisNumericas() {
     n1 = 0
 }
 
+function verificarSeValoresPreenchidos() {
+    if (n1 == 0 || n2 == 0)  return true     
+    else                     return false
+}
+
 
 function criandoEAnexandoParagrafo(val1, val2, resultadoOperacao, msgCalculo) {
     paragrafo = document.createElement('p');
@@ -49,34 +55,52 @@ function criandoEAnexandoParagrafo(val1, val2, resultadoOperacao, msgCalculo) {
     resultadoFinal.appendChild(paragrafo);
 }
 
-operacaoAdicao.addEventListener('click', () => {
+reset.addEventListener('click', () => {
+    n1 = 0
+    n2 = 0
+    resultadoFinal.innerHTML = 'Selecione os números e a operação desejada'
+})
 
-    resultadoAdicao = Number(n1) + Number(n2);
-    criandoEAnexandoParagrafo(n1, n2, resultadoAdicao, 'soma')
-    limpandoAsVariaveisNumericas()
-    
+
+// Events Listeners
+
+operacaoAdicao.addEventListener('click', () => {
+    if (verificarSeValoresPreenchidos()) {
+        resultadoFinal.innerHTML = `${mensagemDeErro}`;
+    } else {
+        resultadoAdicao = Number(n1) + Number(n2);
+        criandoEAnexandoParagrafo(n1, n2, resultadoAdicao, 'soma')
+        limpandoAsVariaveisNumericas()
+    }
 })
 
 operacaoSubtracao.addEventListener('click', () => {
-
-    resultadoSubtracao = n1 - n2;
-    criandoEAnexandoParagrafo(n1, n2, resultadoSubtracao, 'subtração');
-    limpandoAsVariaveisNumericas()    
-    
+    if (verificarSeValoresPreenchidos()) {
+        resultadoFinal.innerHTML = `${mensagemDeErro}`;
+    }
+    else {
+        resultadoSubtracao = n1 - n2;
+        criandoEAnexandoParagrafo(n1, n2, resultadoSubtracao, 'subtração');
+        limpandoAsVariaveisNumericas()
+    }
 })
 
 operacaoMultiplicacao.addEventListener('click', () => {
-
-    resultadoMultiplicacao = n1 * n2;
-    criandoEAnexandoParagrafo(n1, n2, resultadoMultiplicacao, 'multiplicação');
-    limpandoAsVariaveisNumericas()
-    
+    if (verificarSeValoresPreenchidos()) {
+        resultadoFinal.innerHTML = `${mensagemDeErro}`;
+    } else {
+        resultadoMultiplicacao = n1 * n2;
+        criandoEAnexandoParagrafo(n1, n2, resultadoMultiplicacao, 'multiplicação');
+        limpandoAsVariaveisNumericas()
+    }
 })
 
 operacaoDivisao.addEventListener('click', () => {
-
-    resultadoDivisao = (n1 / n2).toFixed(2);
-    criandoEAnexandoParagrafo(n1, n2, resultadoDivisao, 'divisão')
-    limpandoAsVariaveisNumericas()
-    
+    if (verificarSeValoresPreenchidos()) {
+        resultadoFinal.innerHTML = `${mensagemDeErro}`;
+    } else {
+        resultadoDivisao = (n1 / n2).toFixed(2);
+        criandoEAnexandoParagrafo(n1, n2, resultadoDivisao, 'divisão')
+        limpandoAsVariaveisNumericas()
+    }
 })
